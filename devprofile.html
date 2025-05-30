@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil Developer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(to right, #e6ecf4, #fafafa);
+        color: #333;
+        padding: 2rem;
+      }
+
+      .card {
+        max-width: 960px;
+        margin: auto;
+        background: #fff;
+        border-radius: 25px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+        padding: 3rem 2.5rem;
+        border: 2px solid transparent;
+        border-image: linear-gradient(to right, #6c63ff, #f6c90e) 1;
+        animation: glow 4s infinite alternate;
+        transition: all 0.3s ease;
+      }
+
+      @keyframes glow {
+        0% {
+          border-image: linear-gradient(to right, #6c63ff, #f6c90e) 1;
+        }
+        100% {
+          border-image: linear-gradient(to right, #f6c90e, #6c63ff) 1;
+        }
+      }
+
+      .center {
+        text-align: center;
+      }
+
+      .profile-img {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 5px solid #f6c90e;
+        margin-bottom: 1rem;
+      }
+
+      .role {
+        background-color: #6c63ff;
+        color: white;
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        color: #333;
+      }
+
+      .sub {
+        font-size: 0.95rem;
+        color: #666;
+        margin-top: 0.4rem;
+        margin-bottom: 2rem;
+        font-style: italic;
+      }
+
+      section {
+        margin-bottom: 2.2rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+        color: #6c63ff;
+        margin-bottom: 1rem;
+        text-align: left;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .tag {
+        background-color: #f0f0f5;
+        color: #444;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+      }
+
+      ul {
+        padding-left: 1.2rem;
+        color: #444;
+      }
+
+      .cta-btn {
+        display: inline-block;
+        background: #f6c90e;
+        color: white;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: background 0.3s ease;
+        margin-top: 1.5rem;
+      }
+
+      .cta-btn:hover {
+        background: #e0b500;
+      }
+
+      .socials {
+        margin-top: 2rem;
+      }
+
+      .socials a {
+        margin: 0 12px;
+        color: #6c63ff;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      .socials a:hover {
+        color: #4a44c4;
+        text-decoration: underline;
+      }
+
+      @media (max-width: 600px) {
+        .profile-img {
+          width: 100px;
+          height: 100px;
+        }
+
+        h1 {
+          font-size: 1.6rem;
+        }
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="center">
+        <img
+          src="https://media.licdn.com/dms/image/v2/D4E03AQHaVYxhqPagoA/profile-displayphoto-shrink_800_800/B4EZOwSbzQHEAg-/0/1733829443405?e=1750291200&v=beta&t=7igXZDNwa0woHlpYg69BaMFRtDXHPj0cbxNJ09oCsl8"
+          alt="Foto Octa"
+          class="profile-img"
+        />
+        <div class="role">Full-stack Developer</div>
+        <h1>Octa Dama Yanti</h1>
+        <p class="sub">Menggabungkan logika & kreativitas dalam membangun pengalaman digital.</p>
+      </div>
+
+      <section>
+        <h2>Tentang Saya</h2>
+        <p>
+          Saya adalah seorang pengembang web yang berfokus pada pembuatan antarmuka yang bersih, interaktif, dan ramah pengguna. Dengan latar belakang dalam desain dan pengembangan, saya menikmati proses merancang solusi digital yang tidak hanya berfungsi, tapi juga menyenangkan digunakan.
+        </p>
+      </section>
+
+      <section>
+        <h2>Visi Saya</h2>
+        <p>
+          Membangun web yang dapat diakses, berdampak sosial, dan membantu kehidupan sehari-hari masyarakat melalui teknologi yang efisien dan berkelanjutan.
+        </p>
+      </section>
+
+      <section>
+        <h2>Keahlian</h2>
+        <div class="tags">
+          <div class="tag">HTML</div>
+          <div class="tag">CSS</div>
+          <div class="tag">JavaScript</div>
+          <div class="tag">Figma</div>
+          <div class="tag">UI/UX</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Proyek Unggulan</h2>
+        <ul>
+          <li>Website Harmoni Living – landing page properti.</li>
+          <li>Website manajemen kursus online.</li>
+          <li>Design UI/UX.</li>
+        </ul>
+        <a href="portfolio/index.html" class="cta-btn">Lihat Portofolio</a>
+      </section>
+
+      <div class="socials center">
+        <h2>Hubungi Saya</h2>
+        <a href="mailto:octadamayanti23@gmail.com">Email</a>
+        <a href="https://github.com/octady" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/octa-dama-yanti-043722322" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </body>
+</html>

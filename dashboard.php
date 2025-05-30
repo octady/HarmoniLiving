@@ -1,0 +1,427 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+} include 'koneksi.php';
+
+$query = mysqli_query($conn, "SELECT * FROM portfolio ORDER BY created_at DESC");
+
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harmoni Living</title>
+    <!-- Link ke CSS Bootstrap -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <!--NAVBAR-->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand">
+                <img src="img\logo2.png" alt="" class="logo">
+                <span class="brand-name"><strong>Harmoni Living</strong></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Our Project</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>              
+            </div>
+        </div>
+          <!-- Login & Register Buttons (Paling Kanan) -->
+          <div class="user-info">
+          <?php if (isset($_SESSION['username'])): ?>
+              <span class="user-icon"><i class="bi bi-person-fill"></i></span>
+              <span class="username"><?php echo $_SESSION['username']; ?></span>
+              <a href="index2.html" class="btn-logout">Logout</a>
+          <?php else: ?>
+              <a href="login.php" class="btn-auth">Login</a>
+              <a href="register.php" class="btn-auth">Register</a>
+          <?php endif; ?>
+        </div>
+    </nav>
+    </nav>
+    <style>
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-right: 24px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+      }
+
+      .user-icon {
+        font-size: 16px;
+        color: #fff;
+      }
+
+      .username {
+        font-weight: 500;
+        color: #fff;
+      }
+
+      .btn-logout {
+        padding: 6px 14px;
+        background-color:#e74c3c;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 13px;
+        transition: background-color 0.3s ease;
+        font-weight: 500;
+      }
+
+      .btn-logout:hover {
+        background-color:#c0392b;
+      }
+    </style>
+
+ 
+    <!-- Bagian Selamat Datang -->
+    <div class="welcome-container">
+        <h1 class="welcome-text"><span id="typed-text" data-username="<?php echo $_SESSION['username']; ?>"></span></h1>
+    </div>
+    
+  <main>
+    <!--CAROUSEL-->
+    <section id="home">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="img/rumah1.jpeg" class="d-block w-100" alt="...">
+                <div class="carousel-caption">
+                    <h1 class="slide-in">Rancang Hunian Impian Anda Bersama Ahlinya</h1>
+                    <a href="#footer" class="btn btn-primary slide-in delay">Hubungi Kami</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="img/interior.webp" class="d-block w-100" alt="Rumah 2">
+                <div class="carousel-caption">
+                    <h1 class="slide-in">Desain Interior yang Elegan & Fungsional</h1>
+                    <a href="#portfolio" class="btn btn-primary slide-in delay">Lihat Portofolio</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="img/apart.jpg" class="d-block w-100" alt="Rumah 3">
+                <div class="carousel-caption">
+                    <h1 class="slide-in">Bangun Apartemen Sesuai Kebutuhan Anda</h1>
+                    <a href="#contact" class="btn btn-primary slide-in delay">Konsultasi Gratis</a>
+                </div>
+            </div>
+            <!-- Navigasi (Opsional) -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    </section>
+</main>
+<!--CARD-->
+<section class="benefit-section position-relative" style="margin-top: -80px; z-index: 2;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <!-- Card 1 -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="card shadow-lg text-center h-100 border-0">
+            <div class="card-body">
+              <i class="bi bi-lightning-charge-fill text-success fs-1 mb-3"></i>
+              <h5 class="card-title">Hemat Biaya Listrik</h5>
+              <p class="card-text">Kurangi tagihan listrik hingga 60-80% dengan solusi tepat.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="card shadow-lg text-center h-100 border-0">
+            <div class="card-body">
+              <i class="bi bi-house-door-fill text-success fs-1 mb-3"></i>
+              <h5 class="card-title">Tingkatkan Nilai Properti</h5>
+              <p class="card-text">Hunian ramah lingkungan bernilai lebih tinggi & diminati pasar.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="col-md-3 col-sm-6 mb-4">
+          <div class="card shadow-lg text-center h-100 border-0">
+            <div class="card-body">
+              <i class="bi bi-bar-chart-line-fill text-success fs-1 mb-3"></i>
+              <h5 class="card-title">Investasi Jangka Panjang</h5>
+              <p class="card-text">Solusi yang hemat dan bertahan puluhan tahun dengan ROI tinggi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--ABOUT US-->
+  <section id="about" class="py-5 bg-light">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Gambar -->
+        <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right">
+          <img src="img/logo.png" alt="Tentang Harmoni Living" class="img-fluid">
+        </div>
+        <!-- Teks -->
+        <div class="col-md-6" data-aos="fade-left">
+          <h2 class="mb-3 fw-bold">About Harmoni Living</h2>
+          <p class="text-muted mb-4">
+            Harmoni Living adalah pengembang properti terpercaya yang mengedepankan desain modern, kenyamanan, dan keberlanjutan.
+            Dengan pengalaman bertahun-tahun, kami telah membantu ratusan keluarga mewujudkan hunian impian mereka.
+          </p>
+          <ul class="list-unstyled">
+            <li class="mb-3">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              Tim profesional dan berpengalaman di bidang properti.
+            </li>
+            <li class="mb-3">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              Desain rumah modern, efisien, dan ramah lingkungan.
+            </li>
+            <li class="mb-3">
+              <i class="bi bi-check-circle-fill text-success me-2"></i>
+              Komitmen pada kepuasan pelanggan dan kualitas terbaik.
+            </li>
+          </ul>
+          <a href="#services" class="btn btn-success mt-3">Lihat Layanan Kami</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--SERVICES-->
+  <section id="services" class="py-5 bg-white">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold text-success">Our Expertise</h2>
+        <p class="text-muted">Kami menyediakan berbagai layanan terbaik untuk membantu Anda mewujudkan hunian impian.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="zoom-in">
+          <div class="card h-100 border-0 shadow-sm p-4 text-center">
+            <div class="mb-3">
+              <i class="bi bi-house-check fs-1 text-success"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Desain Arsitektur</h5>
+            <p class="text-muted">Rancang desain rumah impian Anda bersama arsitek berpengalaman dan profesional.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card h-100 border-0 shadow-sm p-4 text-center">
+            <div class="mb-3">
+              <i class="bi bi-hammer fs-1 text-success"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Konstruksi Bangunan</h5>
+            <p class="text-muted">Pelaksanaan pembangunan dengan tenaga ahli yang menjamin kualitas dan ketepatan waktu.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card h-100 border-0 shadow-sm p-4 text-center">
+            <div class="mb-3">
+              <i class="bi bi-brush fs-1 text-success"></i>
+            </div>
+            <h5 class="fw-bold mb-2">Interior & Furnishing</h5>
+            <p class="text-muted">Lengkapi hunian Anda dengan desain interior yang nyaman dan estetis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section text-white text-center d-flex align-items-center">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <i class="fas fa-users fa-2x mb-2"></i>
+          <h2 class="fw-bold count" data-target="500">000</h2>
+          <p>Program Completed</p>
+        </div>
+        <div class="col-md-4 mb-4 mb-md-0">
+          <i class="fas fa-chart-line fa-2x mb-2"></i>
+          <h2 class="fw-bold count" data-target="200">000</h2>
+          <p>Happy Clients</p>
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-handshake fa-2x mb-2"></i>
+          <h2 class="fw-bold count" data-target="5000">000</h2>
+          <p>Training Participants</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!--OUR PROJECTS-->
+  <section id="portfolio" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-3">Explore Our Projects</h2>
+      <p class="text-center text-muted mb-5">Inilah beberapa proyek terbaik yang telah kami selesaikan untuk klien kami.</p>
+  
+      <div class="row g-4">
+        <?php while($row = mysqli_fetch_assoc($query)): ?>
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="card border-0 shadow project-card h-100">
+            <img src="img/<?= htmlspecialchars($row['image_url']) ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
+            <div class="card-body">
+              <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
+              <p class="card-text"><?= htmlspecialchars($row['description']) ?></p>
+            </div>
+          </div>
+        </div>
+        <?php endwhile; ?>
+      </div>
+    </div>
+  </section>
+
+  <!--HERO SECTION-->
+  <section class="hero-harmoni">
+    <div class="container text-center">
+      <h1 class="hero-title">
+        Miliki Rumah Modern & Premium<br>
+        Dengan View Danau di Selatan Jakarta
+      </h1>
+      <p class="hero-subtext">
+        SUBSIDI <strong>DP + DISCOUNT</strong> &nbsp;|&nbsp;
+        FREE <strong>BPHTB*</strong> &nbsp;|&nbsp;
+        SUBSIDI <strong>Biaya Akad*</strong>
+      </p>
+      <a href="#form-penawaran" class="hero-btn">DAPATKAN PENAWARAN EKSKLUSIF</a>
+      <p class="hero-note">*S&K Berlaku</p>
+    </div>
+  </section>
+
+  <!--COMPANY PROFILE-->
+  <section class="company-profile">
+  <div class="container">
+    <div class="video-wrapper" data-aos="fade-right">
+      <iframe 
+        src="img/video.mp4" 
+        title="Company Profile Video" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="content-wrapper" data-aos="fade-left">
+      <h2 class="title">Company <span>Profile</span></h2>
+      <p class="subtitle">Kenali lebih dalam tentang visi, misi, dan layanan unggulan kami.</p>
+      <div class="highlights">
+        <ul>
+          <li><strong>Developer tepercaya</strong> yang mengutamakan <span class="highlight">kualitas & profesionalisme</span>.</li>
+          <li><strong>Berpengalaman</strong> dalam membangun hunian modern & nyaman.</li>
+          <li><strong>Berfokus pada kepuasan pelanggan</strong> dari proses awal hingga serah terima.</li>
+          <li><strong>Berkomitmen</strong terhadap nilai investasi jangka panjang bagi konsumen.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+  
+  <!--JS Pribadi-->
+  <script src="script.js"></script>
+
+  <!--JS BOOTSTRAP-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+<!-- CTA & Footer Section -->
+<?php
+// Simpan pesan ke database
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
+    $username = $_SESSION['username'];
+    $email = $_SESSION['email'];
+    $message = mysqli_real_escape_string($conn, $_POST['message']);
+
+    // Simpan pesan ke tabel 'messages'
+    $insert = "INSERT INTO messages (username, email, message) VALUES ('$username', '$email', '$message')";
+    if (mysqli_query($conn, $insert)) {
+        echo "<div class='alert alert-success text-center mt-3'>Pesan berhasil dikirim!</div>";
+    } else {
+        echo "<div class='alert alert-danger text-center mt-3'>Gagal mengirim pesan. Coba lagi nanti.</div>";
+    }
+}
+?>
+<footer class="footer-dark text-white">
+  <section id="contact">
+  <div class="cta-floating container text-center">
+    <h2 class="fw-bold">Take Action</h2>
+    <p class="text-muted">Don't Wait Any Longer</p>
+    <form method="POST" action="dashboard.php" class="d-flex justify-content-center align-items-center flex-wrap gap-2 mt-3">
+      <input type="text" name="message" class="form-control form-control-sm email-input" placeholder="How can we help you today?" required>
+      <button type="submit" class="btn btn-sm btn-success" onclick="event.preventDefault(); this.closest('form').submit();">Send Message</button>
+    </form>
+  </div>
+  </section>
+
+  <section id="footer">
+  <div class="footer-links container mt-5 pt-5 pb-4">
+    <div class="row text-start">
+      <div class="col-md-4 mb-3 text-start">
+        <h5 class="fw-semibold">Harmoni Living</h5>
+        <ul class="list-unstyled">
+          <li><p class="footer-brand">Empowering your digital presence with impactful designs</p></li>
+        </ul>
+        <div class="mt-3">
+          <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-linkedin fa-lg"></i></a>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3 text-start" style="padding-left: 40px;">
+        <h5 class="fw-semibold">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#home" class="footer-link">Home</a></li>
+          <li><a href="#about" class="footer-link">About Us</a></li>
+          <li><a href="#services" class="footer-link">Services</a></li>
+          <li><a href="#portfolio" class="footer-link">Portfolio</a></li>
+          <li><a href="devprofile.html" class="footer-link">Developer Profile</a></li>
+        </ul>
+      </div>
+       <div class="col-md-4 mb-4 text-start">
+        <h5 class="fw-semibold mb-3">Contact</h5>
+        <p class="footer-text2 mb-1"><i class="fas fa-envelope me-2"></i>harmoniliving@gmail.com</p>
+        <p class="footer-text2 mb-1"><i class="fas fa-phone me-2"></i>022-6545-2041</p>
+        <p class="footer-text2"><i class="fas fa-map-marker-alt me-2"></i>Palembang, Indonesia</p>
+      </div>
+    </div>
+    <hr class="footer-text" />
+    <div class="text-center small footer-text">
+      &copy; 2025 Harmoni Living. All rights reserved.
+    </div>
+  </div>
+  </section>
+</footer>
+</html>
